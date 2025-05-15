@@ -1,19 +1,29 @@
 import { NextFunction, Request, Response } from "express";
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 import { ApiError } from "../utils/ApiError";
 
-export const userMiddleWare = (req : Request , res : Response , next : NextFunction)=>{
+const JWT_PASSWORD = process.env.JWT_PASSWORD || "!23456"; // fallback in development
 
-    const header = req.header("authorization")
-    const decoded = jwt.verify(header as string , process.env.JWT_PASSWORD as string)
-    if(decoded){
-       // @ts-ignore
-        req.userId = decoded.id
+interface JwtPayload {
+  id: string;
+}
+
+export const userMiddleWare = (req: Request, res: Response, next: NextFunction) => {
+    const header = req.headers["authorization"];
+    const decoded = jwt.verify(header as string, JWT_PASSWORD)
+    if (decoded) {
+        if (typeof decoded === "string") {
+            res.status(403).json({
+                message: "You are not logged in"
+            })
+            return;    
+        }
+        // @ts-ignore
+        req.userId = (decoded as JwtPayload).id;
         next()
-    }else{
-        throw new ApiError(404 ,"You are not loggin" )
+    } else {
+        res.status(403).json({
+            message: "You are not logged in"
+        })
     }
-
-
-
 }

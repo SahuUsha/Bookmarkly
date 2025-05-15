@@ -3,6 +3,7 @@ import { signInController, signUpController } from "./controllers/user.controlle
 import connectDB from "./DBconnection/DBconnect";
 import dotenv from 'dotenv'
 import { userMiddleWare } from "./middleware/middleware";
+import { contentController } from "./controllers/content.controller";
 
 dotenv.config({
     path : './.env'
@@ -22,11 +23,12 @@ connectDB()
     })
 })
 
-//.d.ts
-app.post("/api/v1/signin",signUpController)
-app.post("/api/v1/signup",signInController)
 
-app.post("/api/v1/content",userMiddleWare,)
+//.d.ts
+app.post("/api/v1/signup",signUpController)
+app.post("/api/v1/signin",signInController)
+
+app.post("/api/v1/content",userMiddleWare,contentController)
 
 // app.get("/api/v1/content")
 // app.delete("/api/v1/content")

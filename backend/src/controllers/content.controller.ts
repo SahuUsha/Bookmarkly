@@ -58,6 +58,14 @@ const deleteContent = async(req : Request , res : Response ,next : NextFunction)
     } catch (error) {
         throw new ApiError(500, "error on deleting the content")
     }
+   
+
+}
+
+export{
+    contentController,
+    getContent,
+    deleteContent
 
 
 }
