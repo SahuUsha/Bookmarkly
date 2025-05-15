@@ -1,3 +1,12 @@
+declare global {
+    namespace express {
+        export interface Request {
+            userId : string
+        }
+    }
+}
+
+
 import express from "express";
 import { signInController, signUpController } from "./controllers/user.controller";
 import connectDB from "./DBconnection/DBconnect";
@@ -22,6 +31,7 @@ connectDB()
         console.log(`${`server is running at port : 5000`}`)
     })
 })
+
 
 
 //.d.ts
