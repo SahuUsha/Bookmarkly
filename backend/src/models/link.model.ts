@@ -1,4 +1,4 @@
-import { Schema, Types } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 
 const linkSchema = new Schema(
@@ -9,9 +9,12 @@ const linkSchema = new Schema(
 
         },
         userId : {
-            type : Types.ObjectId , 
+            type : mongoose.Types.ObjectId , 
             ref : 'User',
-            required : true
+            required : true,
+            unique : true
         }
     },
     {timestamps: true})
+
+    export const Link = mongoose.model("Link",linkSchema)

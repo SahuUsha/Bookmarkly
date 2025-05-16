@@ -12,7 +12,8 @@ import { signInController, signUpController } from "./controllers/user.controlle
 import connectDB from "./DBconnection/DBconnect";
 import dotenv from 'dotenv'
 import { userMiddleWare } from "./middleware/middleware";
-import { contentController } from "./controllers/content.controller";
+import { contentController, deleteContent, getContent } from "./controllers/content.controller";
+import { GetShareLink, ShareLink } from "./controllers/shareLink.controller";
 
 dotenv.config({
     path : './.env'
@@ -40,7 +41,7 @@ app.post("/api/v1/signin",signInController)
 
 app.post("/api/v1/content",userMiddleWare,contentController)
 
-// app.get("/api/v1/content")
-// app.delete("/api/v1/content")
-// app.post("/api/v1/brain/share")
-// app.get("/api/v1/brain/:shareLink")
+app.get("/api/v1/content",userMiddleWare,getContent)
+app.delete("/api/v1/content",userMiddleWare,deleteContent)
+app.post("/api/v1/brain/share",userMiddleWare,ShareLink)
+app.get("/api/v1/brain/:shareLink",GetShareLink)
