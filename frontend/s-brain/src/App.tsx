@@ -10,6 +10,7 @@ import { PlusIcon } from "./icons/plusIcon"
 import { ShareIcon } from "./icons/shareIcon"
 import { useState } from "react"
 import Dashboard from "./pages/dashboard"
+import SignUp from "./pages/signUp"
 
 
 function App() {
@@ -17,7 +18,8 @@ function App() {
 
 
   return (
-   <Dashboard/> 
+  //  <Dashboard/> 
+   <SignUp/>
 
   )
 }

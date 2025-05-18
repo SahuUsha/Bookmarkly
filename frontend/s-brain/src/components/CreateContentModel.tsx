@@ -3,6 +3,7 @@
 import React from 'react'
 import CrossIcon from '../icons/CrossIcon'
 import { Button } from './ui/Button'
+import { Input } from './ui/Input'
 
 const CreateContentModel = ({open , onClose}) => {
   return (
@@ -39,10 +40,3 @@ const CreateContentModel = ({open , onClose}) => {
 }
 
 export default CreateContentModel
-
-function Input({onChange , placeholder} : {onChange: ()=>void}){
-
-    return(
-        <input type="text" onChange={onChange} placeholder={placeholder} className="border-2 font-semibold text-black border-gray-500 rounded-md p-2 " />
-    )
-}

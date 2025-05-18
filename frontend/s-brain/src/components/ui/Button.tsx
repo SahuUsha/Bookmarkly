@@ -8,7 +8,10 @@ interface ButtonProps{
     text : string;
     startIcon ?: ReactElement;
     endIcon ?: ReactElement;
-    onClick : () => void
+    onClick : () => void;
+    fullWidth ?: boolean;
+    loading ?: boolean;
+
 }
 
 
@@ -22,12 +25,12 @@ const sizeStyle = {
     "lg": "py-4 px-6"
 }
 
-const defaultStyles = "rounded-md flex font-light item-center"
+const defaultStyles = "rounded-md flex font-light item-center text-center"
 
 
 export const Button = (props : ButtonProps)=>{
   
-    return <button onClick={props.onClick} className={`${variantStyle[props.variant]} ${defaultStyles} ${sizeStyle[props.size]} `}>{props.startIcon ?<div className="pr-2">{props.startIcon}</div>   :null}{props.text} {props.endIcon}</button>
+    return <button onClick={props.onClick} className={`${variantStyle[props.variant]} ${defaultStyles} ${sizeStyle[props.size]}  ${props.fullWidth? "w-full flex justify-center items-center" : "" }  ${props.loading ? "opacity-45" : ""}`} disabled={props.loading}>{props.startIcon ?<div className="pr-2">{props.startIcon}</div>:null}{props.text} {props.endIcon}</button>
 }
 
 <Button variant="primary"  size="md" onClick={()=>{}}  text="hello"/>
