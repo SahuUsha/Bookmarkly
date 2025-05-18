@@ -22,7 +22,7 @@ const sizeStyle = {
     "lg": "py-4 px-6"
 }
 
-const defaultStyles = "rounded-md flex "
+const defaultStyles = "rounded-md flex font-light item-center"
 
 
 export const Button = (props : ButtonProps)=>{

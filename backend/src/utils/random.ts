@@ -10,4 +10,4 @@ export function random(len: number){
         ans += options[(Math.floor(Math.random() * length))]
     }
     return ans
-};
+}; 
