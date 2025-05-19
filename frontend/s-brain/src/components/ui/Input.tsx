@@ -1,6 +1,14 @@
-export function Input({onChange , placeholder} : {placeholder : string ; onChange: ()=>void}){
+
+interface InputProps{
+    placeholder : string;
+    ref ?: any;
+    
+}
+
+
+export function Input({ref , placeholder} : InputProps){
 
     return(
-        <input type="text" onChange={onChange} placeholder={placeholder} className="border-2 font-semibold text-black border-gray-500 rounded-md p-2 " />
+        <input ref={ref} type="text" placeholder={placeholder} className="border-2 font-semibold text-black border-gray-500 rounded-md p-2 " />
     )
 }

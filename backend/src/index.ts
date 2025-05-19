@@ -13,7 +13,10 @@ import connectDB from "./DBconnection/DBconnect";
 import dotenv from 'dotenv'
 import { userMiddleWare } from "./middleware/middleware";
 import { contentController, deleteContent, getContent } from "./controllers/content.controller";
+
 import { GetShareLink, ShareLink } from "./controllers/shareLink.controller";
+import cors from "cors";
+
 
 dotenv.config({
     path : './.env'
@@ -21,7 +24,9 @@ dotenv.config({
 
 const app = express();
 
+app.use(cors())
 app.use(express.json())
+
 
 connectDB()
 .then(()=>{

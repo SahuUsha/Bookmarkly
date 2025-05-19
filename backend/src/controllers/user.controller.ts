@@ -8,8 +8,8 @@ import jwt from "jsonwebtoken"
 const JWT_PASSWORD = "!23456"
 
 const signUpController = async(req  : Request, res: Response ,next: NextFunction)=>{
-
-    const {username , password} = req.body
+   console.log("sign up controller : ", req.body )
+    const {username,password} = req.body
     
     try {
         if(
@@ -42,16 +42,22 @@ const signUpController = async(req  : Request, res: Response ,next: NextFunction
        res.status(201).json(
         new ApiResponse(200, createdUser , "User Signup successfully")
       )
-    } catch (error) {
-        
-         throw new ApiError(500, "Error on creating user")
+    } catch (err: any) {
+  console.error("⛔ signup failed:", err);
+  // forward to your error‐handler middleware
+  return next(new ApiError(
+    err.statusCode || 500,
+    err.message || "Unexpected error during signup"
+  ));
     }
 
 }
 
 
 
-const signInController = async(req : Request , res : Response)=>{
+const signInController = async(req : Request , res : Response,next : NextFunction)=>{
+  console.log("sign in controller : ", req.body )
+
     const {username , password  } = req.body
     try {
           if(
@@ -78,14 +84,20 @@ const signInController = async(req : Request , res : Response)=>{
         // if(!isPasswordValid){
         //     throw new ApiError(401 , "Password is incorrect")
         // }
+        console.log("token : ", token)
 
         res.status(200).json(
             new ApiResponse(200, token , "signin successfully")
             
         )
 
-    } catch (error) {
-        throw new ApiError(500 , "Error on signing")
+    } catch (err: any) {
+  console.error("⛔ signup failed:", err);
+  // forward to your error‐handler middleware
+  return next(new ApiError(
+    err.statusCode || 500,
+    err.message || "Unexpected error during signup"
+  ));
     }
     
 }
