@@ -1,6 +1,6 @@
 import mongoose, { Schema, Types } from "mongoose";
 
-const contentTypes = ['image','video', 'article','audio']
+const ContentTypes = ["youtube","twitter"]
 
 const contentSchema = new Schema({
     link : {
@@ -9,7 +9,7 @@ const contentSchema = new Schema({
     },
     type : {
         type : String,
-        enum : contentTypes,
+        enum : ContentTypes,
         required : true
     },
     title :{

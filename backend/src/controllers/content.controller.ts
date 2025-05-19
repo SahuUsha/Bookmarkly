@@ -10,18 +10,25 @@ const contentController = async(req: Request , res: Response, next: NextFunction
      const title = req.body.title
 
 
-     const content = await Content.create({
-        link,
-        type,
-        title,
-        // @ts-ignore
-         userId  : req.userId,
-        tags : []
-     })
 
-    res.status(200).json(
-        new ApiResponse(200, "content added successfully")
-     )
+     try {
+        const content = await Content.create({
+           link,
+           type,
+           title,
+           // @ts-ignore
+            userId  : req.userId,
+           tags : []
+        })
+   
+       res.status(200).json(
+           new ApiResponse(200, "content added successfully")
+        )
+     } catch (error) {
+        console.error("Error creating content:", error);
+        throw new ApiError(500, "error on creating the content")
+        
+     }
 }
 
 const getContent = async(req : Request , res : Response , next : NextFunction)=>{
