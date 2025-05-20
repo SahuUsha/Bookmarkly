@@ -50,15 +50,22 @@ const getContent = async(req : Request , res : Response , next : NextFunction)=>
 
 const deleteContent = async(req : Request , res : Response ,next : NextFunction)=>{
     const contentId = req.body.contentId;
+    
 
     try {
         
-      const deleteContent =   await Content.deleteOne({
-            contentId,
+      const deleteContent =   await Content.deleteMany({
+            _id: contentId,
             // @ts-ignore
             userId : req.userId
         })
 
+        console.log("delete content", deleteContent)
+        
+        if(!deleteContent){
+            throw new ApiError(404 , "No content of user")
+        }
+ 
         res.status(200).json(
             new ApiResponse(200, deleteContent , "content deleted successfully")
         )

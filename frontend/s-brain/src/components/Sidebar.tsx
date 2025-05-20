@@ -17,8 +17,8 @@ const Sidebar = () => {
               Brainly
        </div>
       <div className='pt-8 pl-4 '>
-      <SidebarItems Icon={<TwitterIcon/>} text={"Twitter"}/>
-      <SidebarItems Icon={<YouTubeIcon/>} text={"YouTube"}/>
+      <SidebarItems Icon={<TwitterIcon height='30' width='30'/>} text={"Twitter"}/>
+      <SidebarItems Icon={<YouTubeIcon height='30' width='30' />} text={"YouTube"}/>
       </div>
       
   

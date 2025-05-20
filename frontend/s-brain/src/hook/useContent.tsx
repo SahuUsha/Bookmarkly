@@ -16,7 +16,7 @@ const UseContent = () => {
             }
             })
         .then((res)=>{
-            console.log(res.data)
+            console.log(res)
             setContents(res.data.data)
         })
     }
@@ -25,7 +25,7 @@ const UseContent = () => {
         refresh()
        let Interval =  setInterval(()=>{
             refresh()
-        }, 10 * 1000)
+        }, 10 * 6000)
 
         return ()=>{
             clearInterval(Interval)

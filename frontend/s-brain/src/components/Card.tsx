@@ -1,13 +1,54 @@
+import axios from "axios";
+import { DeleteIcon } from "../icons/DeleteIcon";
+import GotoIcon from "../icons/GotoIcon";
 import { ShareIcon } from "../icons/shareIcon"
+import TwitterIcon from "../icons/twitterIcon";
+import YouTubeIcon from "../icons/YouTubeIcon";
+import { BACKEND_URL } from "../config";
 
 interface CardProps{
     title: string;
     link: string;
     type: "twitter" | "youtube" ;
+    // id : string;
+    userId : any;
+    id : any
+
 }
 
 
-export const Card=({title, link, type}: CardProps)=>{
+export const Card=({title, link, id,type , userId}: CardProps)=>{
+
+
+ 
+       const handleDelete = async(contentId : any)=>{
+         console.log("contentId", contentId)
+
+
+        try {
+           const response = await axios.delete(`${BACKEND_URL}/api/v1/content`, {
+        data: { contentId },
+        headers: {
+          Authorization: localStorage.getItem("token") || "",
+        },
+
+
+      });
+
+      if(response){
+        console.log("response", response.data);
+      }
+            
+        } catch (error) {
+            console.error("Error deleting content:", error);
+            alert("Error deleting content");
+            
+        }
+
+       }
+
+
+
     return(
         <div>
 
@@ -15,9 +56,12 @@ export const Card=({title, link, type}: CardProps)=>{
      
    
        <div className="flex justify-between">
-        <div className="flex items-center text-md">
+        <div className="flex items-center text-md font-semibold">
                     <div className="pr-2 text-gray-500">
-            <ShareIcon size="md"/>
+                        {
+                            type === "youtube" ? <YouTubeIcon height="22" width="22"/> : <TwitterIcon  height="21" width="21"/>    
+                        }
+            {/* <ShareIcon size="md"/> */}
             </div>
 
           {title}
@@ -25,12 +69,12 @@ export const Card=({title, link, type}: CardProps)=>{
         <div className="flex items-center">
             <div className="pr-2 text-gray-500">
                 <a href={link} target="blank" >
-                    <ShareIcon size="md"/>
+                    <GotoIcon size="md"/>
                     </a>  
             </div>
-            <div  className="pr-2 text-gray-500">
-            <ShareIcon size="md"/>
-            </div>
+            <button onClick={()=>{handleDelete(id)}}  className="pr-2 text-gray-500">
+            <DeleteIcon size="md"/>
+            </button>
           
         </div>
       
@@ -45,7 +89,9 @@ export const Card=({title, link, type}: CardProps)=>{
   {/* <a href="https://twitter.com/username/status/807811447862468608"></a> */}
 
 </blockquote>}
-     
+<div className="pt-4">
+    <p className="text-neutral-600">Added by <span className="font-semibold text-[1.1rem]">{userId.username}</span></p>
+</div>
 
         
         </div>

@@ -18,6 +18,7 @@ function Dashboard() {
   const [modelOpen, setmodelOpen] = useState(false)
 
   const [contents,refresh] = UseContent()
+  console.log("contents : ",contents)
 
   
 
@@ -51,15 +52,24 @@ const handleSahreUrl=async()=>{
     <div className="p-4 ml-76 bg-slate-50 min-h-screen border-2 border-gray-300">
       <CreateContentModel open={modelOpen} onClose={()=>{setmodelOpen(false)}}/>
 
-      <div className="flex justify-end gap-4">
+      <div className="flex justify-end mb-4 gap-4">
 
   <Button variant="secondary" startIcon={<ShareIcon size="lg"/>} onClick={()=>{handleSahreUrl()}}  text="Share Brain" size="md"/>
   <Button variant="primary" startIcon={<PlusIcon size="lg"/>} onClick={()=>{setmodelOpen(true)}}  text="Add content" size="md"/>
       </div>
 
   <div className="flex  flex-wrap gap-4">
-    {contents.map(({type, link, title})=>
-    <Card key={title} type={type} link={link} title={title} />)}
+   {/* {contents?.data?.data?.length > 0 &&
+  contents.data.map((content) => (
+    <Card
+      // key={content._id}
+      type={content.type}
+      link={content.link}
+      title={content.title}
+    />
+  ))} */}
+    {contents.map(({type, link, title, _id ,userId })=>
+    <Card key={title} type={type} link={link} id={_id} title={title} userId={userId} />)}
     {/* <Card type="twitter" link="https://x.com/SecDef/status/1923863310039949535" title="Raid 2" />
 
     <Card type="youtube" link="https://www.youtube.com/watch?v=F9kXx6BZITw&list=RDF9kXx6BZITw&start_radio=1" title="Raid 2" /> */}
