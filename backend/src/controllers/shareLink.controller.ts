@@ -27,8 +27,8 @@ const ShareLink = async(req : Request,res: Response,next:   NextFunction )=>{
 
      })
      if(existingLink){
-        res.status(300).json(
-            new ApiResponse(300 ,{ hash:  existingLink.hash }, "link is already exist" )
+        res.status(202).json(
+            new ApiResponse(202 ,{ hash:  existingLink.hash }, "link is already exist" )
         )
         return;
      }

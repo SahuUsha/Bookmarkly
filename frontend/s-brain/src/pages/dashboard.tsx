@@ -25,9 +25,14 @@ const handleSahreUrl=async()=>{
   try {
     const response = await axios.post(`${BACKEND_URL}/api/v1/brain/share`,{
       share : true
+    },{
+      headers:{
+        "Authorization" : localStorage.getItem("token")
+      }
     })
-    const shareUrl = `https://localhost:5173/share/${response.data.hash}`
-    alert(`Share this url ${shareUrl}`)
+    console.log("response", response.data)
+    const shareUrl = `localhost:5173/share/${response.data.data.hash}` // add url
+    alert(`${shareUrl}`)
     
   } catch (error) {
     console.error("Error sharing url:", error);
@@ -48,7 +53,7 @@ const handleSahreUrl=async()=>{
 
       <div className="flex justify-end gap-4">
 
-  <Button variant="secondary" startIcon={<ShareIcon size="lg"/>} onClick={()=>{}}  text="Share Brain" size="md"/>
+  <Button variant="secondary" startIcon={<ShareIcon size="lg"/>} onClick={()=>{handleSahreUrl()}}  text="Share Brain" size="md"/>
   <Button variant="primary" startIcon={<PlusIcon size="lg"/>} onClick={()=>{setmodelOpen(true)}}  text="Add content" size="md"/>
       </div>
 
