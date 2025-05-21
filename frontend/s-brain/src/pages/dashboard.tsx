@@ -13,71 +13,69 @@ import { ShareIcon } from "../icons/shareIcon"
 import { useState } from "react"
 import { BACKEND_URL } from "../config"
 
+interface Content {
+  type: "twitter" | "youtube"
+  link: string
+  title: string
+  _id: string
+  userId: string
+}
+
 
 function Dashboard() {
-  const [modelOpen, setmodelOpen] = useState(false)
+  const [modelOpen, setModelOpen] = useState<boolean>(false)
+  const [selectedPlatform, setSelectedPlatform] = useState<string>('all')
+  const [contents, refresh] = UseContent() as [Content[], () => void]
 
-  const [contents,refresh] = UseContent()
-  console.log("contents : ",contents)
+  const filteredContents = selectedPlatform === 'all'
+    ? contents
+    : contents.filter(item => item.type === selectedPlatform)
 
-  
-
-const handleSahreUrl=async()=>{
-  try {
-    const response = await axios.post(`${BACKEND_URL}/api/v1/brain/share`,{
-      share : true
-    },{
-      headers:{
-        "Authorization" : localStorage.getItem("token")
-      }
-    })
-    console.log("response", response.data)
-    const shareUrl = `localhost:5173/share/${response.data.data.hash}` // add url
-    alert(`${shareUrl}`)
-    
-  } catch (error) {
-    console.error("Error sharing url:", error);
-    alert("Error sharing url")
-    
+  const handleShareUrl = async () => {
+    try {
+      const response = await axios.post(
+        `${BACKEND_URL}/api/v1/brain/share`,
+        { share: true },
+        { headers: { "Authorization": localStorage.getItem("token") || '' } }
+      )
+      const shareUrl = `localhost:5173/share/${response.data.data.hash}`
+      alert(`Share link : ${shareUrl}`)
+    } catch (error) {
+      console.error("Error sharing url:", error)
+      alert("Error sharing url")
+    }
   }
-}
-   
-
 
   return (
-    <div className="">
-      <div>
-    <Sidebar/>
+    <div>
+      <Sidebar onSelect={setSelectedPlatform} />
+      <div className="p-4 ml-76 bg-slate-50 min-h-screen border-2 border-gray-300">
+        <CreateContentModel open={modelOpen} onClose={() => setModelOpen(false)} />
+
+        <div className="flex justify-end mb-4 gap-4">
+          <Button
+            variant="secondary"
+            startIcon={<ShareIcon size="lg" />}
+            onClick={handleShareUrl}
+            text="Share Brain"
+            size="md"
+          />
+          <Button
+            variant="primary"
+            startIcon={<PlusIcon size="lg" />}
+            onClick={() => setModelOpen(true)}
+            text="Add content"
+            size="md"
+          />
+        </div>
+
+        <div className="flex flex-wrap gap-4">
+          {filteredContents.map(({ type, link, title, _id, userId }) => (
+            <Card key={_id} type={type} link={link} id={_id} title={title} userId={userId} />
+          ))}
+        </div>
       </div>
-    <div className="p-4 ml-76 bg-slate-50 min-h-screen border-2 border-gray-300">
-      <CreateContentModel open={modelOpen} onClose={()=>{setmodelOpen(false)}}/>
-
-      <div className="flex justify-end mb-4 gap-4">
-
-  <Button variant="secondary" startIcon={<ShareIcon size="lg"/>} onClick={()=>{handleSahreUrl()}}  text="Share Brain" size="md"/>
-  <Button variant="primary" startIcon={<PlusIcon size="lg"/>} onClick={()=>{setmodelOpen(true)}}  text="Add content" size="md"/>
-      </div>
-
-  <div className="flex  flex-wrap gap-4">
-   {/* {contents?.data?.data?.length > 0 &&
-  contents.data.map((content) => (
-    <Card
-      // key={content._id}
-      type={content.type}
-      link={content.link}
-      title={content.title}
-    />
-  ))} */}
-    {contents.map(({type, link, title, _id ,userId })=>
-    <Card key={title} type={type} link={link} id={_id} title={title} userId={userId} />)}
-    {/* <Card type="twitter" link="https://x.com/SecDef/status/1923863310039949535" title="Raid 2" />
-
-    <Card type="youtube" link="https://www.youtube.com/watch?v=F9kXx6BZITw&list=RDF9kXx6BZITw&start_radio=1" title="Raid 2" /> */}
-  </div>
     </div>
-     
-    </div> 
-
   )
 }
 
