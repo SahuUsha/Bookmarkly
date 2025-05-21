@@ -57,7 +57,7 @@ const CreateContentModel = ({open   , onClose}) => {
             </div>
                  <div className='w-screen h-screen bg-neutral-700 fixed top-0 left-0 opacity-80 z-50 flex justify-center items-center'> 
 
-                <div className=' flex flex-col justify-center  '>
+                <div className=' flex flex-col justify-center w-[35%]  '>
                     <div className='bg-white opacity-100 p-4 rounded'>
 
             <div className='flex justify-end '>
