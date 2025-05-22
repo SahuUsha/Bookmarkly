@@ -102,6 +102,9 @@ const signInController = async(req : Request , res : Response,next : NextFunctio
     
 }
 
+const signOutController = async(req : Request , res : Response , next : NextFunction)=>{
+      
+}
 
 
 export {signUpController,

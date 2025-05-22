@@ -28,7 +28,7 @@ const SignIn= () => {
           const jwtToken  = res.data.data
           console.log("jwtToken : ", jwtToken)
           localStorage.setItem("token", jwtToken)
-          navigate("/")
+          navigate("/dashboard")
 
         }
        
