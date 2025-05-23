@@ -1,4 +1,6 @@
 import React from 'react'
+import { iconSizeVariants, type IconProps } from './icons'
+
 
 const Logo = () => {
   return (
