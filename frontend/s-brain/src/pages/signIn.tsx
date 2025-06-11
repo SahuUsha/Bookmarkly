@@ -107,7 +107,7 @@ const SignIn: React.FC = () => {
 
           <p className="text-center mt-4">
             Not signed up?{' '}
-            <button onClick={() => navigate('/signup')} className="font-bold text-[#281f8b]">
+            <button onClick={() => navigate('/')} className="font-bold text-[#281f8b]">
               SignUp
             </button>
           </p>

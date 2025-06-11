@@ -38,7 +38,9 @@ function Dashboard() {
         { share: true },
         { headers: { "Authorization": localStorage.getItem("token") || '' } }
       )
-      const shareUrl = `localhost:5173/share/${response.data.data.hash}`
+
+      console.log(response.data.data.hash)
+      const shareUrl = `https://bookmarkly-hbad.onrender.com/share/${response.data.data.hash}`
       alert(`Share link : ${shareUrl}`)
     } catch (error) {
       console.error("Error sharing url:", error)
@@ -70,9 +72,9 @@ function Dashboard() {
         </div>
 
         <div className="flex flex-wrap gap-4">
-          {filteredContents.map(({ type, link, title, _id, userId }) => (
+          { filteredContents.length > 0 ?  filteredContents.map(({ type, link, title, _id, userId }) => (
             <Card key={_id} type={type} link={link} id={_id} title={title} userId={userId} />
-          ))}
+          )) : <h1 className="text-3xl font-bold  text-[#332d72] flex justify-center text-center item-center">Add your contents...</h1>}
         </div>
       </div>
     </div>
