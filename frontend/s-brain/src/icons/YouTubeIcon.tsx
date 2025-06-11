@@ -1,4 +1,4 @@
-import React from 'react'
+
 import type { IconHeightWidth } from './icons'
 
 const YouTubeIcon = (props : IconHeightWidth) => {

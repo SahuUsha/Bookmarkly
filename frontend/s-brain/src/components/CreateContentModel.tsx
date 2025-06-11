@@ -1,6 +1,6 @@
 
 
-import React, { useRef,useState } from 'react'
+import  { useRef,useState } from 'react'
 import CrossIcon from '../icons/CrossIcon'
 import { Button } from './ui/Button'
 import { Input } from './ui/Input'
@@ -8,16 +8,20 @@ import { BACKEND_URL } from '../config'
 import axios from 'axios'
 
 
-enum ContentType {
-    Youtube = "youtube",
-    Twitter = "twitter",
-}
+export const ContentType = {
+    Youtube: "youtube",
+    Twitter: "twitter",
+} as const;
+
+export type ContentType = (typeof ContentType)[keyof typeof ContentType];
+
 
 // @ts-ignore
 const CreateContentModel = ({open   , onClose}) => {
      const titleRef = useRef<HTMLInputElement>(null);
      const linkRef = useRef<HTMLInputElement>(null);
-     const [type, setType] = useState(ContentType.Youtube)
+     const [type, setType] = useState<ContentType>(ContentType.Youtube);
+
 
 
     const handleaddContent=async()=>{

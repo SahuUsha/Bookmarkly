@@ -25,7 +25,7 @@ interface Content {
 function Dashboard() {
   const [modelOpen, setModelOpen] = useState<boolean>(false)
   const [selectedPlatform, setSelectedPlatform] = useState<string>('all')
-  const [contents, refresh] = UseContent() as [Content[], () => void]
+  const [contents] = UseContent() as [Content[], () => void]
 
   const filteredContents = selectedPlatform === 'all'
     ? contents

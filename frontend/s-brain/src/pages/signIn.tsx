@@ -1,10 +1,10 @@
-import React, { useRef, useState, useMemo } from 'react'
+import { useRef,  useMemo } from 'react'
 import { Button } from '../components/ui/Button'
 import { Input } from '../components/ui/Input'
 import { BACKEND_URL } from '../config'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import Logo from '../icons/logo'
+
 
 // BubbleBackground component for floating bubbles animation
 type Bubble = {
@@ -43,11 +43,11 @@ export const BubbleBackground: React.FC = () => {
           }}
         />
       ))}
-      <style jsx>{`
-        @keyframes floatUp {
-          to { transform: translateY(-110vh); }
-        }
-      `}</style>
+     <style>{`
+  @keyframes floatUp {
+    to { transform: translateY(-110vh); }
+  }
+`}</style>
     </div>
   )
 }

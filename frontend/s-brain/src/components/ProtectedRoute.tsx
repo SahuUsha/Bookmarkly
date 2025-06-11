@@ -1,13 +1,12 @@
 
 
-import React from 'react'
 
-import { Navigate
- } from 'react-router-dom'
+import type { ReactNode } from 'react';
+import { Navigate} from 'react-router-dom'
 import { isAuthenticated } from '../utils/auth';
 
 interface ProtectedRouteProps {
-    children: JSX.Element;
+   children: ReactNode;
 }
 
 const ProtectedRoute : React.FC<ProtectedRouteProps> = ({children}) => {

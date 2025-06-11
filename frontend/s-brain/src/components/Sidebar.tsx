@@ -6,7 +6,7 @@ import TwitterIcon from '../icons/twitterIcon'
 import YouTubeIcon from '../icons/YouTubeIcon'
 import Logo from '../icons/logo'
 import AllIcon from '../icons/AllIcon'
-import { Button } from './ui/Button'
+
 import LogoutIcon from '../icons/logout'
 import { useNavigate } from 'react-router-dom'
 

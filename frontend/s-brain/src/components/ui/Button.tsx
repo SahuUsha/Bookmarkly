@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
 
-type Variants = "primary" | "secondary"
+
 
 interface ButtonProps{
     variant : "primary" | "secondary";

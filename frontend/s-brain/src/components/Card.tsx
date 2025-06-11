@@ -1,7 +1,7 @@
 import axios from "axios";
 import { DeleteIcon } from "../icons/DeleteIcon";
 import GotoIcon from "../icons/GotoIcon";
-import { ShareIcon } from "../icons/shareIcon"
+
 import TwitterIcon from "../icons/twitterIcon";
 import YouTubeIcon from "../icons/YouTubeIcon";
 import { BACKEND_URL } from "../config";
