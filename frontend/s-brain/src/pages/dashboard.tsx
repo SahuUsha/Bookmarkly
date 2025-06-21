@@ -40,7 +40,7 @@ function Dashboard() {
       )
 
       console.log(response.data.data.hash)
-      const shareUrl = `https://bookmarkly-hbad.onrender.com/share/${response.data.data.hash}`
+      const shareUrl = `https://bookmarkly-fq9v.vercel.app/share/${response.data.data.hash}`
       alert(`Share link : ${shareUrl}`)
     } catch (error) {
       console.error("Error sharing url:", error)
